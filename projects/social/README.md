@@ -47,14 +47,17 @@ Note that in this sample, Users 3, 4 and 9 are not in User 1's extended social n
 ## 3. Questions
 
 1. To create 100 users with an average of 10 friends each, how many times would you need to call `addFriendship()`? Why?
+    500. Total friendships = number of connections = 100 * 10. (1000)Add friendship starts a two way connection, so call it half as many times as your total number of connections. (1000 / 2 = 500)
 
 2. If you create 1000 users with an average of 5 random friends each, what percentage of other users will be in a particular user's extended social network? What is the average degree of separation between a user and those in his/her extended network?
+    Percentage of other users in a single users friend network is around 0.5%. Percentage of other users in a single friends EXTENDED network is about 99.5%
 
 
 
 ## 4. Stretch Goal
 
 1. You might have found the results from question #2 above to be surprising. Would you expect results like this in real life? If not, what are some ways you could improve your friendship distribution model for more realistic results?
+    In real life, this is unlikely, because friendships are not random, They're often based on age, location, interests, and common connections. You could simulate this by providing a random set of interests, an age, and a location to each user, and then when choosing their friends, you could give a heavily weighted preference to other users that match those properties. You could also weight more strongly users that have friends in common.
 
 2. If you followed the hints for part 1, your `populateGraph()` will run in O(n^2) time. Refactor your code to run in O(n) time. Are there any tradeoffs that come with this implementation?
-
+    The tradeoff for what I've written is that as you approach maximum density in your graph, it's going to get ridiculously slow. It will have to find a random friendship that isn't already taken, not a problem if most of them aren't, but a huge problem if most of them are. For example: in the above example of 1000 user, avg 5 friendships each, you generally get less than 10 random attempts failing. If you change that to a network of 100 people, with an avg of 50 friends each, you get around 1000 random attempts failing.
